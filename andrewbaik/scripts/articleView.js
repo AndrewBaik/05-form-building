@@ -75,7 +75,7 @@ articleView.setTeasers = () => {
 };
 
 // COMMENT: Where is this function called? Why?
-// PUT YOUR RESPONSE HERE
+// This function is called on the bottom of new html page, so that the page generates all the contents prior to rendering this function.
 articleView.initNewArticlePage = () => {
   // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later or otherwise edit the tab navigation.
   $('.tab-content').show();
@@ -104,9 +104,12 @@ articleView.create = () => {
     category : $('#category').val(),
     author : $('#author').val(),
     authorUrl : $('#authorUrl').val(),
-    publishedOn : $('#publishedOn').val(),
-    body : $('#body').val()
+    body : $('#body').val(),
   };
+
+  if ( $('#publishedOn').val() === 'on') {
+    aobj.publishedOn = new Date();
+  }
 
   let article = new Article(aobj);
 
@@ -121,7 +124,7 @@ articleView.create = () => {
 };
 
 // COMMENT: Where is this function called? Why?
-// PUT YOUR RESPONSE HERE
+// This function is called on the very bottom of index page, so that system generates all the contents prior to rendering this function.
 articleView.initIndexPage = () => {
   articles.forEach(article => $('#articles').append(article.toHtml()));
   articleView.populateFilters();
